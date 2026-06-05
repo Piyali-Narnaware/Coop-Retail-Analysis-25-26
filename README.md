@@ -35,6 +35,8 @@ High-level KPI dashboard displaying:
 - Top-performing stores and categories
 - Monthly revenue trends
 
+![Executive Overview](images/Executive-Overview.png)
+
 ### 2. Store Performance & Operations
 Store-level analytics including:
 - Sales performance by store location
@@ -42,12 +44,16 @@ Store-level analytics including:
 - Store-wise category performance
 - Regional comparisons and benchmarking
 
+![Store Performance & Operations](images/Store-Performance-Operations.png)
+
 ### 3. Customer & Membership Insights
 Customer analysis section featuring:
 - Member vs. non-member sales breakdown
 - Customer segmentation and purchasing patterns
 - Member retention and growth metrics
 - Average transaction value by customer type
+
+![Customer & Membership Insights](images/Customer-Membership-Insights.png)
 
 ## Key Insights
 - Primary revenue drivers and high-performing product categories
