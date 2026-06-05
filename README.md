@@ -75,13 +75,4 @@ The dashboard provides interactive visualizations with:
 - Real-time KPI cards for quick performance assessment
 - Trend analysis and comparative charts
 
-### Executive Overview
-![Executive Overview](images/executive_Overview.png)
-
-### Customer & Membership Insights
-![Customer & Membership Insights](images/Customer_&_Membership_Insights.png)
-
-### Store Performance & Operations
-![Store Performance & Operations](images/Store_performance_&_operations.png)
-
 For detailed specifications and technical documentation, refer to the scripts and analysis files in the repository.
