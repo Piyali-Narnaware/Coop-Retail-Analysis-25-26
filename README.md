@@ -1,78 +1,114 @@
-# Coop Retail Analysis Dashboard 2025-26
+# Co-op Retail Analytics Dashboard
 
-## Business Objective
-The primary objective of this project is to develop a comprehensive retail analytics dashboard for the Co-operative retail organization. This dashboard aims to provide actionable insights into sales performance, customer behavior, and operational metrics across multiple store locations. The analysis will help stakeholders make data-driven decisions to optimize inventory management, enhance customer satisfaction, and improve overall profitability.
+![Power BI](https://img.shields.io/badge/Power%20BI-dashboard-yellow)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![DAX](https://img.shields.io/badge/DAX-measures-orange)
 
-## Dataset Overview
-The dataset comprises retail transaction data collected from multiple Co-operative store locations. It includes:
-- **Transaction Details**: Sales records with timestamps, product information, and monetary values
-- **Store Information**: Location-based data and store performance metrics
-- **Customer Data**: Membership details and purchasing patterns
-- **Product Categories**: Classification of items sold across different categories
-- **Time-based Metrics**: Daily, monthly, and seasonal sales trends
+A comprehensive retail analytics dashboard for the Co-operative retail organisation, analysing revenue performance, customer membership behaviour, category contribution, and store operations. Built with Power BI, DAX, and Python-powered data pipelines.
 
-The data spans a significant period, capturing diverse retail operations and customer interactions across various store formats.
-
-## Data Cleaning and Preparation
-Data preparation involved several key steps:
-- **Missing Value Handling**: Identified and addressed null values across critical columns
-- **Data Type Conversion**: Standardized data types for consistency and analysis
-- **Duplicate Removal**: Eliminated redundant records to ensure data integrity
-- **Outlier Detection**: Identified and handled anomalous values in sales and quantity fields
-- **Date Standardization**: Converted date formats for temporal analysis
-- **Category Mapping**: Consolidated product categories for meaningful segmentation
-- **Data Validation**: Cross-checked key metrics for accuracy and consistency
-
-The cleaned dataset is now ready for analysis and visualization.
+---
 
 ## Dashboard Pages
-The interactive dashboard includes the following pages:
 
-### 1. Executive Overview
-High-level KPI dashboard displaying:
-- Total sales revenue and transaction volume
-- Year-over-year growth metrics
-- Top-performing stores and categories
-- Monthly revenue trends
+| Page | Focus | Key Metrics |
+|------|-------|-------------|
+| **Executive Overview** | High-level KPIs | Total Revenue, Total Units, Unique Customers, Avg Availability, Avg Basket Value |
+| **Store Performance & Operations** | Store-level analysis | Revenue by store, Availability %, Operational efficiency |
+| **Customer & Membership Insights** | Customer behaviour | Member vs Non-member revenue, Membership impact |
 
+### Executive Overview
 ![Executive Overview](images/Executive-Overview.png)
 
-### 2. Store Performance & Operations
-Store-level analytics including:
-- Sales performance by store location
-- Operational efficiency metrics
-- Store-wise category performance
-- Regional comparisons and benchmarking
+### Store Performance & Operations
+![Store Performance](images/Store-Performance-Operations.png)
 
-![Store Performance & Operations](images/Store-Performance-Operations.png)
+### Customer & Membership Insights
+![Customer Insights](images/Customer-Membership-Insights.png)
 
-### 3. Customer & Membership Insights
-Customer analysis section featuring:
-- Member vs. non-member sales breakdown
-- Customer segmentation and purchasing patterns
-- Member retention and growth metrics
-- Average transaction value by customer type
+---
 
-![Customer & Membership Insights](images/Customer-Membership-Insights.png)
+## Data Pipeline
+
+```
+┌──────────────────┐     ┌───────────────────┐     ┌──────────────────┐     ┌──────────────────┐
+│  Raw Retail CSV  │────▶│  Python Cleaning  │────▶│  Cleaned Data    │────▶│  Power BI        │
+│                  │     │  (pandas)         │     │  + Summary CSVs  │     │  Dashboard.pbix  │
+│  Transactions    │     │  - Strip whitespc │     │                  │     │  DAX Measures    │
+│  Stores          │     │  - Type convert   │     │  store_revenue   │     │  - Total Revenue │
+│  Customers       │     │  - Remove invalid │     │  monthly_revenue │     │  - AOV           │
+│  Categories      │     │  - Calc basket    │     │  category_summary│     │  - On-Time Del % │
+└──────────────────┘     └───────────────────┘     └──────────────────┘     └──────────────────┘
+```
+
+### Data Cleaning (`data_cleaning.py`)
+
+- Whitespace stripping and standardised text formatting
+- Date conversion and validation
+- Outlier detection and removal
+- Invalid record filtering
+- Basket value calculation per transaction
+
+### Data Exploration (`data_exploration.py`)
+
+- Revenue grouped by store, category, customer, member status
+- Monthly revenue trend computation
+- Product availability percentage analysis
+- Exported summary CSVs for Power BI ingestion
+
+---
 
 ## Key Insights
-- Primary revenue drivers and high-performing product categories
-- Customer purchasing behavior and seasonal trends
-- Store performance variations and opportunities for improvement
-- Member engagement and loyalty program effectiveness
-- Regional and temporal patterns in sales data
 
-## Tools Used
-- **Microsoft Power BI**: Interactive dashboard creation and visualization
-- **Python**: Data cleaning, exploration, and preparation (scripts included)
-- **Excel/CSV**: Data storage and intermediate processing
-- **DAX**: Advanced measures and calculated fields in Power BI
+- **Revenue Segmentation** — Identified top-performing stores, categories, and customer segments
+- **Customer Behaviour** — Member vs non-member revenue contribution patterns
+- **Product Availability** — Correlation between stock availability and revenue by store/category
+- **Temporal Trends** — Monthly revenue patterns revealed seasonal demand fluctuations
 
-## Dashboard Preview
-The dashboard provides interactive visualizations with:
-- Dynamic filtering capabilities for date ranges, stores, and categories
-- Drill-down functionality for detailed analysis
-- Real-time KPI cards for quick performance assessment
-- Trend analysis and comparative charts
+---
 
-For detailed specifications and technical documentation, refer to the scripts and analysis files in the repository.
+## Project Structure
+
+```
+├── coop_retail_dashboard.pbix          # Power BI dashboard file
+├── data_cleaning.py                    # Python data preparation
+├── data_exploration.py                 # Python exploratory analysis
+├── scripts/
+│   ├── script1.py                      # Additional analysis scripts
+│   └── script2.py
+├── images/                             # Dashboard screenshots
+│   ├── Executive-Overview.png
+│   ├── Store-Performance-Operations.png
+│   └── Customer-Membership-Insights.png
+├── data/                               # Raw datasets
+│   ├── file1.csv
+│   └── file2.csv
+├── *_summary.csv                       # Pre-aggregated CSVs for dashboard
+├── README.md
+```
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/Piyali-Narnaware/Coop-Retail-Analysis-25-26.git
+cd Coop-Retail-Analysis-25-26
+pip install pandas numpy matplotlib seaborn
+```
+
+Run data preparation:
+
+```bash
+python data_cleaning.py
+python data_exploration.py
+```
+
+Open `coop_retail_dashboard.pbix` in Power BI Desktop.
+
+---
+
+## Dependencies
+
+- Microsoft Power BI Desktop
+- Python 3.8+ (pandas, numpy, matplotlib)
+- DAX (built into Power BI)
