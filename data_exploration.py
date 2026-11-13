@@ -1,7 +1,10 @@
+from pathlib import Path
 import pandas as pd
 
+ROOT = Path(__file__).resolve().parent
+
 # Load cleaned dataset
-df = pd.read_csv("E:/Git_projects/dada/coop_retail_cleaned_dataset.csv")
+df = pd.read_csv(ROOT / "coop_retail_cleaned_dataset.csv")
 
 # Check columns
 print("Columns in dataset:")
@@ -133,7 +136,7 @@ print(availability_by_member)
 # 10. Basket Value by Store
 # -----------------------------
 basket_value_by_store = (
-    df.groupby("store")["avg_basket_value"]
+    df.groupby("store")["revenue_per_unit"]
     .mean()
     .sort_values(ascending=False)
     .round(2)
@@ -146,7 +149,7 @@ print(basket_value_by_store)
 # 11. Basket Value by Category
 # -----------------------------
 basket_value_by_category = (
-    df.groupby("category")["avg_basket_value"]
+    df.groupby("category")["revenue_per_unit"]
     .mean()
     .sort_values(ascending=False)
     .round(2)
@@ -159,7 +162,7 @@ print(basket_value_by_category)
 # 12. Basket Value by Member
 # -----------------------------
 basket_value_by_member = (
-    df.groupby("member")["avg_basket_value"]
+    df.groupby("member")["revenue_per_unit"]
     .mean()
     .sort_values(ascending=False)
     .round(2)
@@ -178,7 +181,7 @@ store_summary = (
         total_units=("units", "sum"),
         unique_customers=("customer_id", "nunique"),
         avg_availability=("availability_pct", "mean"),
-        avg_basket_value=("avg_basket_value", "mean")
+        revenue_per_unit=("revenue_per_unit", "mean")
     )
     .round(2)
     .sort_values("total_revenue", ascending=False)
@@ -197,7 +200,7 @@ category_summary = (
         total_units=("units", "sum"),
         unique_customers=("customer_id", "nunique"),
         avg_availability=("availability_pct", "mean"),
-        avg_basket_value=("avg_basket_value", "mean")
+        revenue_per_unit=("revenue_per_unit", "mean")
     )
     .round(2)
     .sort_values("total_revenue", ascending=False)
@@ -216,7 +219,7 @@ member_summary = (
         total_units=("units", "sum"),
         unique_customers=("customer_id", "nunique"),
         avg_availability=("availability_pct", "mean"),
-        avg_basket_value=("avg_basket_value", "mean")
+        revenue_per_unit=("revenue_per_unit", "mean")
     )
     .round(2)
     .sort_values("total_revenue", ascending=False)
@@ -233,7 +236,7 @@ kpi_summary = {
     "total_units": int(df["units"].sum()),
     "unique_customers": int(df["customer_id"].nunique()),
     "avg_availability": round(df["availability_pct"].mean(), 2),
-    "avg_basket_value": round(df["revenue"].sum() / df["units"].sum(), 2)
+    "revenue_per_unit": round(df["revenue"].sum() / df["units"].sum(), 2)
 }
 
 print("\nOverall KPI Summary")
@@ -249,10 +252,10 @@ store_revenue_df = store_revenue.reset_index()
 category_revenue_df = category_revenue.reset_index()
 member_revenue_df = member_revenue.reset_index()
 
-monthly_revenue_df.to_csv("E:/Git_projects/dada/monthly_revenue.csv", index=False)
-store_revenue_df.to_csv("E:/Git_projects/dada/store_revenue.csv", index=False)
-category_revenue_df.to_csv("E:/Git_projects/dada/category_revenue.csv", index=False)
-member_revenue_df.to_csv("E:/Git_projects/dada/member_revenue.csv", index=False)
+monthly_revenue_df.to_csv(str(ROOT / "monthly_revenue.csv"), index=False)
+store_revenue_df.to_csv(str(ROOT / "store_revenue.csv"), index=False)
+category_revenue_df.to_csv(str(ROOT / "category_revenue.csv"), index=False)
+member_revenue_df.to_csv(str(ROOT / "member_revenue.csv"), index=False)
 
 print("Dashboard export files saved successfully.")
 
