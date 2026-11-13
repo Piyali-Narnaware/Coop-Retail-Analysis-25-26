@@ -38,7 +38,7 @@ df["availability_pct"] = pd.to_numeric(df["availability_pct"], errors="coerce")
 df = df.drop_duplicates()
 
 # 8. Remove invalid records
-df = df[df["revenue"] >= 0]
+df = df[df["date"].notna()]\ndf = df[df["revenue"] >= 0]
 df = df[df["units"] > 0]
 df = df[(df["availability_pct"] >= 0) & (df["availability_pct"] <= 100)]
 
@@ -48,7 +48,7 @@ df["year"] = df["date"].dt.year
 df["month_name"] = df["date"].dt.month_name()
 df["day_name"] = df["date"].dt.day_name()
 
-# 10. Create calculated field: average basket value
+# 10. Revenue per unit (not average basket value)
 df["revenue_per_unit"] = df["revenue"] / df["units"]
 
 # 11. Create member flag
