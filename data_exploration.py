@@ -23,8 +23,7 @@ store_revenue = (
     .round(2)
 )
 
-print("
-Revenue by Store")
+print("\nRevenue by Store")
 print(store_revenue)
 
 # -----------------------------
@@ -37,8 +36,7 @@ category_revenue = (
     .round(2)
 )
 
-print("
-Revenue by Category")
+print("\nRevenue by Category")
 print(category_revenue)
 
 # -----------------------------
@@ -51,8 +49,7 @@ customer_revenue = (
     .round(2)
 )
 
-print("
-Top 10 Customers by Revenue")
+print("\nTop 10 Customers by Revenue")
 print(customer_revenue.head(10))
 
 # -----------------------------
@@ -65,8 +62,7 @@ member_revenue = (
     .round(2)
 )
 
-print("
-Member vs Non-Member Revenue")
+print("\nMember vs Non-Member Revenue")
 print(member_revenue)
 
 # -----------------------------
@@ -79,8 +75,7 @@ monthly_revenue = (
     .round(2)
 )
 
-print("
-Monthly Revenue Trend")
+print("\nMonthly Revenue Trend")
 print(monthly_revenue)
 
 # -----------------------------
@@ -95,8 +90,7 @@ store_revenue_by_month = (
 
 store_revenue_by_month["revenue"] = store_revenue_by_month["revenue"].round(2)
 
-print("
-Store Revenue by Month")
+print("\nStore Revenue by Month")
 print(store_revenue_by_month.head(20))
 
 # -----------------------------
@@ -109,8 +103,7 @@ availability_by_store = (
     .round(2)
 )
 
-print("
-Availability by Store")
+print("\nAvailability by Store")
 print(availability_by_store)
 
 # -----------------------------
@@ -123,8 +116,7 @@ availability_by_category = (
     .round(2)
 )
 
-print("
-Availability by Category")
+print("\nAvailability by Category")
 print(availability_by_category)
 
 # -----------------------------
@@ -137,8 +129,7 @@ availability_by_member = (
     .round(2)
 )
 
-print("
-Availability by Member")
+print("\nAvailability by Member")
 print(availability_by_member)
 
 # -----------------------------
@@ -152,8 +143,7 @@ basket_value_by_store = (
     .round(2)
 )
 
-print("
-Basket Value by Store")
+print("\nBasket Value by Store")
 print(basket_value_by_store)
 
 # -----------------------------
@@ -167,8 +157,7 @@ basket_value_by_category = (
     .round(2)
 )
 
-print("
-Basket Value by Category")
+print("\nBasket Value by Category")
 print(basket_value_by_category)
 
 # -----------------------------
@@ -182,8 +171,7 @@ basket_value_by_member = (
     .round(2)
 )
 
-print("
-Basket Value by Member")
+print("\nBasket Value by Member")
 print(basket_value_by_member)
 
 # -----------------------------
@@ -203,8 +191,7 @@ store_summary = (
 )
 
 store_summary["revenue_per_unit"] = (store_summary["total_revenue"] / store_summary["total_units"]).round(2)
-print("
-Store Summary")
+print("\nStore Summary")
 print(store_summary)
 
 # -----------------------------
@@ -224,8 +211,7 @@ category_summary = (
 )
 
 category_summary["revenue_per_unit"] = (category_summary["total_revenue"] / category_summary["total_units"]).round(2)
-print("
-Category Summary")
+print("\nCategory Summary")
 print(category_summary)
 
 # -----------------------------
@@ -245,8 +231,7 @@ member_summary = (
 )
 
 member_summary["revenue_per_unit"] = (member_summary["total_revenue"] / member_summary["total_units"]).round(2)
-print("
-Member Summary")
+print("\nMember Summary")
 print(member_summary)
 
 # -----------------------------
@@ -260,8 +245,7 @@ kpi_summary = {
     "revenue_per_unit": round(df["revenue"].sum() / df["units"].sum(), 2)
 }
 
-print("
-Overall KPI Summary")
+print("\nOverall KPI Summary")
 print(kpi_summary)
 
 # -----------------------------
