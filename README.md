@@ -1,8 +1,8 @@
 # Retail Performance Analysis | Python & Power BI
 
-**Question:** Which stores and categories warrant closer investigation based on recorded revenue, unit sales and product availability?
+**Aim:** Which stores and categories warrant closer investigation based on recorded revenue, unit sales and product availability?
 
-This portfolio case study uses a retail sample dataset, not actual Co-op trading records. Python cleans and summarises the data; a Power BI report presents store, category and membership comparisons. The aim is to turn routine KPIs into questions a store manager can act on—not to claim measured sales uplift.
+This portfolio case study uses a retail sample dataset, not actual Co-op trading records. Python cleans and summarises the data; a Power BI report presents store, category and membership comparisons. I wanted to see whether routine store KPIs could point to useful follow-up questions, especially around availability and category performance.
 
 ![Executive overview of retail KPIs](images/Executive-Overview.png)
 
@@ -21,7 +21,7 @@ This portfolio case study uses a retail sample dataset, not actual Co-op trading
 
 The repository includes the underlying summary exports and a reproducible [management briefing generator](generate_management_brief.py). Run it to create `reports/MANAGEMENT_BRIEF.md` and store, category, membership and monthly CSV tables. The report is generated from the cleaned dataset rather than written around assumed results.
 
-The next operational question is whether categories with lower recorded availability also contribute material revenue. That comparison can prioritise an investigation, but it cannot establish lost sales or prove that a replenishment change will improve revenue.
+The next thing I'd check is whether categories with lower availability also account for a meaningful share of revenue. That comparison can prioritise an investigation, but it cannot establish lost sales or prove that a replenishment change will improve revenue.
 
 ## Dashboard
 
