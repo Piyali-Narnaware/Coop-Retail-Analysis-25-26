@@ -104,9 +104,6 @@ python data_exploration.py
 
 Both scripts use paths relative to the repository folder. `revenue_per_unit` is revenue divided by units sold, not average basket value. The dataset does not identify individual baskets.
 
-```bash
-```
-
 Open `coop_retail_dashboard.pbix` in Power BI Desktop.
 
 ---
