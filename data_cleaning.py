@@ -38,7 +38,8 @@ df["availability_pct"] = pd.to_numeric(df["availability_pct"], errors="coerce")
 df = df.drop_duplicates()
 
 # 8. Remove invalid records
-df = df[df["date"].notna()]\ndf = df[df["revenue"] >= 0]
+df = df[df["date"].notna()]
+df = df[df["revenue"] >= 0]
 df = df[df["units"] > 0]
 df = df[(df["availability_pct"] >= 0) & (df["availability_pct"] <= 100)]
 
