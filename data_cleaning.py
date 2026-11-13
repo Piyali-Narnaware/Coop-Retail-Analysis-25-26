@@ -1,9 +1,13 @@
+from pathlib import Path
 import pandas as pd
 
+ROOT = Path(__file__).resolve().parent
+
 # 1. Load data
-df = pd.read_csv("E:/Git_projects/dada/Retail_Convenience_Analytics_Dataset.csv")
+df = pd.read_csv(ROOT / "Retail_Convenience_Analytics_Dataset.csv")
 
 # 2. Check basic info
+original_rows = len(df)
 print(df.head())
 print(df.info())
 print(df.isnull().sum())
@@ -45,7 +49,7 @@ df["month_name"] = df["date"].dt.month_name()
 df["day_name"] = df["date"].dt.day_name()
 
 # 10. Create calculated field: average basket value
-df["avg_basket_value"] = df["revenue"] / df["units"]
+df["revenue_per_unit"] = df["revenue"] / df["units"]
 
 # 11. Create member flag
 df["is_member"] = df["member"].apply(lambda x: 1 if x == "Yes" else 0)
@@ -56,9 +60,9 @@ print(df.info())
 print(df.isnull().sum())
 
 
-print("Original rows:", 5000)
+print("Original rows:", original_rows)
 print("Cleaned rows:", len(df))
-print("Rows removed:", 5000 - len(df))
+print("Rows removed:", original_rows - len(df))
 
 summary = {
     "total_rows": len(df),
@@ -66,12 +70,12 @@ summary = {
     "total_units": df["units"].sum(),
     "unique_customers": round(df["customer_id"].nunique(), 2),
     "avg_availability": round(df["availability_pct"].mean(), 2),
-    "avg_basket_value": round(df["revenue"].sum() / df["units"].sum(), 2)
+    "revenue_per_unit": round(df["revenue"].sum() / df["units"].sum(), 2)
 }
 
 print(summary)
 
 # 13. Save cleaned file
-df.to_csv("E:/Git_projects/dada/coop_retail_cleaned_dataset.csv", index=False)
+df.to_csv(ROOT / "coop_retail_cleaned_dataset.csv", index=False)
 
 print("Cleaned file saved successfully!")
