@@ -1,115 +1,51 @@
-# Co-op Retail Analytics Dashboard
+# Retail Performance Analysis | Python & Power BI
 
-![Power BI](https://img.shields.io/badge/Power%20BI-dashboard-yellow)
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![DAX](https://img.shields.io/badge/DAX-measures-orange)
+**Question:** Which stores and categories warrant closer investigation based on recorded revenue, unit sales and product availability?
 
-A retail dashboard project using the dataset in this repository to explore store sales, product categories, membership and availability. Python prepares the data and Power BI presents the results. This is a portfolio analysis, not a report of Co-op's actual commercial performance.
+This portfolio case study uses a retail sample dataset, not actual Co-op trading records. Python cleans and summarises the data; a Power BI report presents store, category and membership comparisons. The aim is to turn routine KPIs into questions a store manager can act on—not to claim measured sales uplift.
 
----
+![Executive overview of retail KPIs](images/Executive-Overview.png)
 
-## Dashboard Pages
+## What I examined
 
-| Page | Focus | Key Metrics |
-|------|-------|-------------|
-| **Executive Overview** | High-level KPIs | Total Revenue, Total Units, Unique Customers, Avg Availability, Revenue per Unit |
-| **Store Performance & Operations** | Store-level analysis | Revenue by store, Availability %, Operational efficiency |
-| **Customer & Membership Insights** | Customer behaviour | Member vs Non-member revenue, Membership impact |
+| Area | Measure | Management use |
+|---|---|---|
+| Store performance | Revenue, units and revenue per unit | Compare store mix before investigating differences |
+| Availability | Mean recorded availability by store and category | Identify where to review replenishment practices |
+| Membership | Revenue and units by membership status | Describe purchasing patterns without assuming causation |
+| Monthly performance | Recorded revenue over time | Check changes and possible seasonality |
 
-### Executive Overview
-![Executive Overview](images/Executive-Overview.png)
+**Important metric definition:** Revenue per unit = total revenue / total units. It is **not** average basket value; the dataset does not identify shopping baskets.
 
-### Store Performance & Operations
-![Store Performance](images/Store-Performance-Operations.png)
+## Findings and next decisions
 
-### Customer & Membership Insights
-![Customer Insights](images/Customer-Membership-Insights.png)
+The repository includes the underlying summary exports and a reproducible [management briefing generator](generate_management_brief.py). Run it to create `reports/MANAGEMENT_BRIEF.md` and store, category, membership and monthly CSV tables. The report is generated from the cleaned dataset rather than written around assumed results.
 
----
+The next operational question is whether categories with lower recorded availability also contribute material revenue. That comparison can prioritise an investigation, but it cannot establish lost sales or prove that a replenishment change will improve revenue.
 
-## Data Pipeline
+## Dashboard
 
-```
-┌──────────────────┐     ┌───────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  Raw Retail CSV  │────▶│  Python Cleaning  │────▶│  Cleaned Data    │────▶│  Power BI        │
-│                  │     │  (pandas)         │     │  + Summary CSVs  │     │  Dashboard.pbix  │
-│  Transactions    │     │  - Strip whitespc │     │                  │     │  DAX Measures    │
-│  Stores          │     │  - Type convert   │     │  store_revenue   │     │  - Total Revenue │
-│  Customers       │     │  - Remove invalid │     │  monthly_revenue │     │  - Revenue per Unit           │
-│  Categories      │     │  - Calc revenue/unit    │     │  category_summary│     │  - On-Time Del % │
-└──────────────────┘     └───────────────────┘     └──────────────────┘     └──────────────────┘
-```
+| View | Screenshot |
+|---|---|
+| Store performance and operations | [Open image](images/Store-Performance-Operations.png) |
+| Customer and membership | [Open image](images/Customer-Membership-Insights.png) |
 
-### Data Cleaning (`data_cleaning.py`)
+The editable report is in `coop_retail_dashboard.pbix`. Screenshots show the existing report; the PBIX's DAX and refresh behaviour have not been independently retested in this update.
 
-- Whitespace stripping and standardised text formatting
-- Date conversion and validation
-- Invalid record filtering
-- Revenue per unit calculation (not average basket value; basket counts are not available)
-
-### Data Exploration (`data_exploration.py`)
-
-- Revenue grouped by store, category, customer, member status
-- Monthly revenue trend computation
-- Product availability percentage analysis
-- Exported summary CSVs for Power BI ingestion
-
----
-
-## Key Insights
-
-- **Revenue Segmentation** — Identified top-performing stores, categories, and customer segments
-- **Customer Behaviour** — Member vs non-member revenue contribution patterns
-- **Product Availability** — Compared average recorded availability across stores and categories; this is not a causal analysis
-- **Temporal Trends** — Monthly revenue patterns revealed seasonal demand fluctuations
-
----
-
-## Project Structure
-
-```
-├── coop_retail_dashboard.pbix          # Power BI dashboard file
-├── data_cleaning.py                    # Python data preparation
-├── data_exploration.py                 # Python exploratory analysis
-├── scripts/
-│   ├── script1.py                      # Additional analysis scripts
-│   └── script2.py
-├── images/                             # Dashboard screenshots
-│   ├── Executive-Overview.png
-│   ├── Store-Performance-Operations.png
-│   └── Customer-Membership-Insights.png
-├── data/                               # Raw datasets
-│   ├── file1.csv
-│   └── file2.csv
-├── *_summary.csv                       # Pre-aggregated CSVs for dashboard
-├── README.md
-```
-
----
-
-## Installation
+## Reproduce
 
 ```bash
-git clone https://github.com/Piyali-Narnaware/Coop-Retail-Analysis-25-26.git
-cd Coop-Retail-Analysis-25-26
-pip install pandas numpy matplotlib seaborn
-```
-
-Run data preparation:
-
-```bash
+pip install pandas tabulate
 python data_cleaning.py
 python data_exploration.py
+python generate_management_brief.py
 ```
 
-Both scripts use paths relative to the repository folder. `revenue_per_unit` is revenue divided by units sold, not average basket value. The dataset does not identify individual baskets.
+Run the scripts from the repository root. The [GitHub Actions workflow](.github/workflows/validate-retail.yml) also runs the pipeline and uploads the management briefing as an artifact.
 
-Open `coop_retail_dashboard.pbix` in Power BI Desktop.
+## Limits
 
----
-
-## Dependencies
-
-- Microsoft Power BI Desktop
-- Python 3.8+ (pandas, numpy, matplotlib)
-- DAX (built into Power BI)
+- The sample is not evidence of Co-op's actual performance
+- Store comparisons are not adjusted for store size, opening hours or footfall
+- Membership comparisons are descriptive, not estimates of membership's effect
+- No intervention, revenue improvement or cost saving has been measured
