@@ -4,7 +4,7 @@
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 ![DAX](https://img.shields.io/badge/DAX-measures-orange)
 
-A comprehensive retail analytics dashboard for the Co-operative retail organisation, analysing revenue performance, customer membership behaviour, category contribution, and store operations. Built with Power BI, DAX, and Python-powered data pipelines.
+A retail dashboard project using the dataset in this repository to explore store sales, product categories, membership and availability. Python prepares the data and Power BI presents the results. This is a portfolio analysis, not a report of Co-op's actual commercial performance.
 
 ---
 
@@ -12,7 +12,7 @@ A comprehensive retail analytics dashboard for the Co-operative retail organisat
 
 | Page | Focus | Key Metrics |
 |------|-------|-------------|
-| **Executive Overview** | High-level KPIs | Total Revenue, Total Units, Unique Customers, Avg Availability, Avg Basket Value |
+| **Executive Overview** | High-level KPIs | Total Revenue, Total Units, Unique Customers, Avg Availability, Revenue per Unit |
 | **Store Performance & Operations** | Store-level analysis | Revenue by store, Availability %, Operational efficiency |
 | **Customer & Membership Insights** | Customer behaviour | Member vs Non-member revenue, Membership impact |
 
@@ -35,8 +35,8 @@ A comprehensive retail analytics dashboard for the Co-operative retail organisat
 │                  │     │  (pandas)         │     │  + Summary CSVs  │     │  Dashboard.pbix  │
 │  Transactions    │     │  - Strip whitespc │     │                  │     │  DAX Measures    │
 │  Stores          │     │  - Type convert   │     │  store_revenue   │     │  - Total Revenue │
-│  Customers       │     │  - Remove invalid │     │  monthly_revenue │     │  - AOV           │
-│  Categories      │     │  - Calc basket    │     │  category_summary│     │  - On-Time Del % │
+│  Customers       │     │  - Remove invalid │     │  monthly_revenue │     │  - Revenue per Unit           │
+│  Categories      │     │  - Calc revenue/unit    │     │  category_summary│     │  - On-Time Del % │
 └──────────────────┘     └───────────────────┘     └──────────────────┘     └──────────────────┘
 ```
 
@@ -44,9 +44,8 @@ A comprehensive retail analytics dashboard for the Co-operative retail organisat
 
 - Whitespace stripping and standardised text formatting
 - Date conversion and validation
-- Outlier detection and removal
 - Invalid record filtering
-- Basket value calculation per transaction
+- Revenue per unit calculation (not average basket value; basket counts are not available)
 
 ### Data Exploration (`data_exploration.py`)
 
@@ -61,7 +60,7 @@ A comprehensive retail analytics dashboard for the Co-operative retail organisat
 
 - **Revenue Segmentation** — Identified top-performing stores, categories, and customer segments
 - **Customer Behaviour** — Member vs non-member revenue contribution patterns
-- **Product Availability** — Correlation between stock availability and revenue by store/category
+- **Product Availability** — Compared average recorded availability across stores and categories; this is not a causal analysis
 - **Temporal Trends** — Monthly revenue patterns revealed seasonal demand fluctuations
 
 ---
@@ -101,6 +100,11 @@ Run data preparation:
 ```bash
 python data_cleaning.py
 python data_exploration.py
+```
+
+Both scripts use paths relative to the repository folder. `revenue_per_unit` is revenue divided by units sold, not average basket value. The dataset does not identify individual baskets.
+
+```bash
 ```
 
 Open `coop_retail_dashboard.pbix` in Power BI Desktop.
