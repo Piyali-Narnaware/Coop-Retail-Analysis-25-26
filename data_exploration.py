@@ -133,11 +133,10 @@ print("\nAvailability by Member")
 print(availability_by_member)
 
 # -----------------------------
-# 10. Basket Value by Store
+# 10. Revenue per unit by store
 # -----------------------------
 basket_value_by_store = (
-    df.groupby("store")["revenue_per_unit"]
-    .mean()
+    df.groupby("store")[["revenue", "units"]]\n    .sum()\n    .pipe(lambda x: x["revenue"] / x["units"])
     .sort_values(ascending=False)
     .round(2)
 )
@@ -146,11 +145,10 @@ print("\nBasket Value by Store")
 print(basket_value_by_store)
 
 # -----------------------------
-# 11. Basket Value by Category
+# 11. Revenue per unit by category
 # -----------------------------
 basket_value_by_category = (
-    df.groupby("category")["revenue_per_unit"]
-    .mean()
+    df.groupby("category")[["revenue", "units"]]\n    .sum()\n    .pipe(lambda x: x["revenue"] / x["units"])
     .sort_values(ascending=False)
     .round(2)
 )
@@ -159,11 +157,10 @@ print("\nBasket Value by Category")
 print(basket_value_by_category)
 
 # -----------------------------
-# 12. Basket Value by Member
+# 12. Revenue per unit by member
 # -----------------------------
 basket_value_by_member = (
-    df.groupby("member")["revenue_per_unit"]
-    .mean()
+    df.groupby("member")[["revenue", "units"]]\n    .sum()\n    .pipe(lambda x: x["revenue"] / x["units"])
     .sort_values(ascending=False)
     .round(2)
 )
@@ -183,11 +180,10 @@ store_summary = (
         avg_availability=("availability_pct", "mean"),
         revenue_per_unit=("revenue_per_unit", "mean")
     )
-    .round(2)
-    .sort_values("total_revenue", ascending=False)
+    .round(2)\n    .sort_values("total_revenue", ascending=False)
 )
 
-print("\nStore Summary")
+store_summary["revenue_per_unit"] = (store_summary["total_revenue"] / store_summary["total_units"]).round(2)\nprint("\nStore Summary")
 print(store_summary)
 
 # -----------------------------
@@ -202,11 +198,10 @@ category_summary = (
         avg_availability=("availability_pct", "mean"),
         revenue_per_unit=("revenue_per_unit", "mean")
     )
-    .round(2)
-    .sort_values("total_revenue", ascending=False)
+    .round(2)\n    .sort_values("total_revenue", ascending=False)
 )
 
-print("\nCategory Summary")
+category_summary["revenue_per_unit"] = (category_summary["total_revenue"] / category_summary["total_units"]).round(2)\nprint("\nCategory Summary")
 print(category_summary)
 
 # -----------------------------
@@ -221,11 +216,10 @@ member_summary = (
         avg_availability=("availability_pct", "mean"),
         revenue_per_unit=("revenue_per_unit", "mean")
     )
-    .round(2)
-    .sort_values("total_revenue", ascending=False)
+    .round(2)\n    .sort_values("total_revenue", ascending=False)
 )
 
-print("\nMember Summary")
+member_summary["revenue_per_unit"] = (member_summary["total_revenue"] / member_summary["total_units"]).round(2)\nprint("\nMember Summary")
 print(member_summary)
 
 # -----------------------------
